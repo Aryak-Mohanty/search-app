@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+  <link rel="icon" type="image/png" href="icon.png">
+  <title>Search Website</title>
+  <style>
+    html, body {
+      height: 100%;
+      background-color: #F5EFE7;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #container {
+      display: flex;
+      height: 100%;
+      margin-top: 50px;
+      border-top: 1px solid #ccc;
+    }
+
+    #searchFrame {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+      box-sizing: border-box;
+      border-right: 1px solid #ccc;
+    }
+
+    #searchInput {
+      padding: 10px;
+      border-radius: 20px;
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    #searchButton {
+      padding: 10px 15px;
+      border-radius: 20px;
+      background-color: #4285F4;
+      color: #fff;
+      border: none;
+    }
+
+    #resultFrame {
+      flex: 1;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    #resultFrame .resultContainer {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    #resultFrame .resultContainer:last-child {
+      border-bottom: none;
+    }
+
+    #resultFrame .resultLink {
+      text-decoration: none;
+    }
+
+    #resultFrame .resultTitle {
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    #resultFrame .resultSnippet {
+  color: #666;
+  display: flex;
+  align-items: center; /* Add this line */
+}
+
+    #resultFrame .resultImage {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 10px;
+    }
+
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    nav {
+      height: 50px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      border-bottom: 1px solid #ccc;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    li {
+      float: left;
+    }
+
+    a {
+      display: block;
+      color: green;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background-color: green;
+      color: #fff;
+      transform: scale(1.2);
+    }
+
+    nav a {
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-switch {
+      display: inline-block;
+      position: relative;
+      width: 60px;
+      height: 34px;
+    }
+
+    .toggle-switch input {
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    .dark-mode {
+      background-color: #222222;
+      color: #ffffff;
+    }
+
+    .toggle-switch.dark-mode .slider {
+      background-color: #444;
+    }
+
+    .toggle-switch.dark-mode input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    #buttondark {
+      margin-top: 10px;
+      float: right;
+      padding-right: 17px;
+    }
+
+    .dark-mode .container {
+      background-color: #222222;
+      color: #ffffff;
+    }
+
+    .dark-mode h1 {
+      color: yellow;
+    }
+
+    .dark-mode button {
+      background-color: #444;
+      color: #ffffff;
+    }
+
+    .dark-mode nav {
+      background-color: #444;
+    }
+
+    #resultFrame .resultSnippet {
+      color: #666;
+    }
+
+    .dark-mode #resultFrame .resultSnippet {
+      color: #ffffff; /* Set text color to white in dark mode */
+    }
+
+    /* Media queries for responsive layout */
+    @media (max-width: 768px) {
+      #container {
+        flex-direction: column;
+      }
+
+      #searchFrame {
+        border-right: none;
+        padding: 20px 0;
+      }
+
+      #searchInput {
+        width: 100%;
+        max-width: 300px;
+      }
+      #resultFrame .resultImage {
+    max-width: 100%;
+    max-height: auto;
+    margin-right: 10px;
+  }
+  #resultFrame .resultSnippet {
+    flex: 1;
+  }
+    }
+  </style>
+</head>
+<body style="height: 100%;">
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="https://aryak-mohanty.github.io/Projects/">List</a></li>
+      <li id="buttondark">
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle1">
+          <span class="slider"></span>
+        </label>
+      </li>
+    </ul>
+  </nav>
+  <div id="container">
+    <div id="searchFrame">
+      <h1>Search</h1>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <input type="text" id="searchInput" autocomplete="off">
+        <button id="searchButton" onclick="search()">
+          <img src="icons8-search-48.png" alt="Search" style="height: 20px; width: 20px; margin-right: 5px;">
+        </button>
+      </div>
+    </div>
+    <div id="resultFrame"></div>
+  </div>
+  <script>
+    //service
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then((registration) => {
+        console.log('Service Worker registered with scope:', registration.scope);
+      })
+      .catch((error) => {
+        console.error('Service Worker registration failed:', error);
+      });
+  }
+
+    //dark
+    const toggleSwitch = document.querySelector('.toggle-switch input[type="checkbox"]');
+    const container = document.querySelector('.container');
+    toggleSwitch.addEventListener('change', function() {
+      if (this.checked) {
+        container.classList.add('dark-mode');
+      } else {
+        container.classList.remove('dark-mode');
+      }
+    });
+    const toggle1 = document.querySelector('#toggle1');
+    toggle1.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+    });
+    //search
+    // Add an event listener for keydown event on the search input
+    document.getElementById('searchInput').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        search(); // Call the search function when Enter key is pressed
+      }
+    });
+    function search() {
+      var searchTerm = document.getElementById('searchInput').value;
+      performSearch(searchTerm);
+    }
+    function performSearch(searchTerm) {
+      var apiKey = 'AIzaSyA2iJ5eI2Y_4wM04yOaX0fXpINMemQAnw0'; // Replace with your Google Custom Search API key
+      var searchEngineId = '40f00a839f2504550'; // Replace with your Google Custom Search Engine ID
+
+      // Prepare the request URL
+      var apiUrl = 'https://www.googleapis.com/customsearch/v1';
+      apiUrl += '?key=' + apiKey;
+      apiUrl += '&cx=' + searchEngineId;
+      apiUrl += '&q=' + encodeURIComponent(searchTerm);
+
+      // Send the request
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', apiUrl, true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+          displayResults(response.items);
+        } else {
+          console.error('Request failed.  Returned status of ' + xhr.status);
+        }
+      };
+      xhr.send();
+    }
+    function displayResults(results) {
+      var resultFrame = document.getElementById('resultFrame');
+      resultFrame.innerHTML = '';
+
+// ...
+for (var i = 0; i < results.length; i++) {
+  var result = results[i];
+
+  var resultContainer = document.createElement('div');
+  resultContainer.classList.add('resultContainer');
+
+  var resultTitle = document.createElement('a'); // Change this line to create the result title as an <a> element
+  resultTitle.classList.add('resultTitle');
+  resultTitle.href = result.link;
+  resultTitle.textContent = result.title;
+  resultTitle.target = '_blank';
+
+  resultTitle.addEventListener('mouseover', function() {
+    this.style.color = 'blue';
+  });
+
+  resultTitle.addEventListener('mouseout', function() {
+    this.style.color = '#000';
+  });
+
+  var resultSnippet = document.createElement('p');
+  resultSnippet.classList.add('resultSnippet');
+  resultSnippet.textContent = result.snippet;
+
+  var resultImage = document.createElement('img');
+  resultImage.classList.add('resultImage');
+  resultImage.src = result.pagemap && result.pagemap.cse_image && result.pagemap.cse_image[0].src || ''; // Check if properties exist
+
+  resultContainer.appendChild(resultTitle);
+
+  var contentWrapper = document.createElement('div');
+  contentWrapper.style.display = 'flex'; /* Add this line */
+  contentWrapper.appendChild(resultImage);
+  contentWrapper.appendChild(resultSnippet);
+
+  resultContainer.appendChild(contentWrapper);
+  resultFrame.appendChild(resultContainer);
+
+  // ...
+
+  // Add code to set text color to white in dark mode
+  resultTitle.addEventListener('mouseover', function() {
+    this.style.color = 'blue';
+  });
+
+  resultTitle.addEventListener('mouseout', function() {
+    this.style.color = 'green'; // Change this line to match the desired link color
+  });
+}
+}
+  </script>
+</body>
+</html>
