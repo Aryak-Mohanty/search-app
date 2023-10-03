@@ -9,14 +9,7 @@ const resourcesToCache = [
   // ... add other assets you want to cache ...
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.addAll(resourcesToCache);
-      })
-  );
-});
+
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
