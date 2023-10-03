@@ -12,9 +12,7 @@ self.addEventListener('install', (event) => {
           cache.add('icon.png'),
           // Add other assets you want to cache here...
         ])
-        .catch((error) => {
-          console.error('Cache addAll error:', error);
-        });
+       
       })
   );
 });
