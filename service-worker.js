@@ -6,11 +6,13 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        return cache.addAll([
-          '/',
-          'index.html',
-          'icon.png',
-          // ... other assets ...
+        return Promise.all([
+          cache.add('/'),
+          cache.add('/index.html'),
+          cache.add('/styles.css'),
+          cache.add('/script.js'),
+          cache.add('/icon.png'),
+          // Add other assets you want to cache here...
         ])
         .catch((error) => {
           console.error('Cache addAll error:', error);
