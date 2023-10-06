@@ -1,18 +1,31 @@
-// service-worker.js
-
-const CACHE_NAME = 'weather-app-cache-v1';
+const CACHE_NAME = 'searchpage-cache-v1';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        return Promise.all([
-          cache.add('/'),
-          cache.add('index.html'),
-          cache.add('icon.png'),
-          // Add other assets you want to cache here...
-        ])
-       
+        // Array of resources to cache
+        const resourcesToCache = [
+          '/',
+          'index.html',
+          'icon.png',
+          // ... other assets ...
+        ];
+
+        // Loop through the resources and cache each one individually
+        return Promise.all(
+          resourcesToCache.map((resource) => {
+            return fetch(resource)
+              .then((response) => {
+                if (response.status === 200) {
+                  return cache.put(resource, response);
+                }
+              })
+              .catch((error) => {
+                console.error('Cache put error:', error);
+              });
+          })
+        );
       })
   );
 });
