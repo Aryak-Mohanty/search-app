@@ -4,8 +4,8 @@
   <link rel="icon" type="image/png" href="icon.png">
   <title>Search Website</title>
   <link rel="manifest" href="manifest.json" />
-
   <style>
+    
     html, body {
       height: 100%;
       background-color: #F5EFE7;
@@ -13,14 +13,12 @@
       padding: 0;
       overflow: hidden;
     }
-
     #container {
       display: flex;
       height: 100%;
       margin-top: 50px;
       border-top: 1px solid #ccc;
     }
-
     #searchFrame {
       flex: 1;
       height: 100%;
@@ -32,14 +30,12 @@
       box-sizing: border-box;
       border-right: 1px solid #ccc;
     }
-
     #searchInput {
       padding: 10px;
       border-radius: 20px;
       width: 300px;
       margin-bottom: 20px;
     }
-
     #searchButton {
       padding: 10px 15px;
       border-radius: 20px;
@@ -47,7 +43,6 @@
       color: #fff;
       border: none;
     }
-
     #resultFrame {
       flex: 1;
       height: 100%;
@@ -55,45 +50,36 @@
       box-sizing: border-box;
       overflow-y: auto;
     }
-
     #resultFrame .resultContainer {
       margin-bottom: 10px;
       padding-bottom: 10px;
       border-bottom: 1px solid #ccc;
     }
-
     #resultFrame .resultContainer:last-child {
       border-bottom: none;
     }
-
     #resultFrame .resultLink {
       text-decoration: none;
     }
-
     #resultFrame .resultTitle {
       margin-bottom: 5px;
       text-align: center;
     }
-
     #resultFrame .resultSnippet {
-  color: #666;
-  display: flex;
-  align-items: center; /* Add this line */
-}
-
+    color: #666;
+    display: flex;
+    align-items: center; /* Add this line */
+    }
     #resultFrame .resultImage {
     max-width: 100px;
     max-height: 100px;
     margin-right: 10px;
     }
-
-
     button {
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
     }
-
     nav {
       height: 50px;
       position: fixed;
@@ -110,11 +96,9 @@
       padding: 0;
       overflow: hidden;
     }
-
     li {
       float: left;
     }
-
     a {
       display: block;
       color: green;
@@ -122,28 +106,23 @@
       padding: 14px 16px;
       text-decoration: none;
     }
-
     nav a:hover {
       background-color: green;
       color: #fff;
       transform: scale(1.2);
     }
-
     nav a {
       transition: transform 0.3s ease;
     }
-
     .toggle-switch {
       display: inline-block;
       position: relative;
       width: 60px;
       height: 34px;
     }
-
     .toggle-switch input {
       display: none;
     }
-
     .slider {
       position: absolute;
       cursor: pointer;
@@ -156,7 +135,6 @@
       transition: .4s;
       border-radius: 34px;
     }
-
     .slider:before {
       position: absolute;
       content: "";
@@ -169,66 +147,52 @@
       transition: .4s;
       border-radius: 50%;
     }
-
     input:checked + .slider {
       background-color: #2196F3;
     }
-
     input:focus + .slider {
       box-shadow: 0 0 1px #2196F3;
     }
-
     input:checked + .slider:before {
       -webkit-transform: translateX(26px);
       -ms-transform: translateX(26px);
       transform: translateX(26px);
     }
-
     .dark-mode {
       background-color: #222222;
       color: #ffffff;
     }
-
     .toggle-switch.dark-mode .slider {
       background-color: #444;
     }
-
     .toggle-switch.dark-mode input:checked + .slider {
       background-color: #2196F3;
     }
-
     #buttondark {
       margin-top: 10px;
       float: right;
       padding-right: 17px;
     }
-
     .dark-mode .container {
       background-color: #222222;
       color: #ffffff;
     }
-
     .dark-mode h1 {
       color: yellow;
     }
-
     .dark-mode button {
       background-color: #444;
       color: #ffffff;
     }
-
     .dark-mode nav {
       background-color: #444;
     }
-
     #resultFrame .resultSnippet {
       color: #666;
     }
-
     .dark-mode #resultFrame .resultSnippet {
       color: #ffffff; /* Set text color to white in dark mode */
     }
-
     /* Media queries for responsive layout */
     @media (max-width: 768px) {
       #container {
@@ -253,9 +217,10 @@
     flex: 1;
   }
     }
-  </style>
+</style>
 </head>
 <body style="height: 100%;">
+    //button
   <nav>
     <ul>
       <li><a href="#">Home</a></li>
@@ -268,6 +233,7 @@
       </li>
     </ul>
   </nav>
+  //searchButton
   <div id="container">
     <div id="searchFrame">
       <h1>Search</h1>
@@ -277,21 +243,20 @@
           <img src="icons8-search-48.png" alt="Search" style="height: 20px; width: 20px; margin-right: 5px;">
         </button>
       </div>
-    </div>
+    </div>//searchFrame
     <div id="resultFrame"></div>
-  </div>
+  </div>//container
   <script>
     //service
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/test/service-worker.js')
-      .then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch((error) => {
-        console.error('Service Worker registration failed:', error);
-      });
-  }
-
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/test/service-worker.js')
+        .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+        });
+    }
     //dark
     const toggleSwitch = document.querySelector('.toggle-switch input[type="checkbox"]');
     const container = document.querySelector('.container');
@@ -318,15 +283,13 @@
       performSearch(searchTerm);
     }
     function performSearch(searchTerm) {
-      var apiKey = 'AIzaSyA2iJ5eI2Y_4wM04yOaX0fXpINMemQAnw0'; // Replace with your Google Custom Search API key
-      var searchEngineId = '40f00a839f2504550'; // Replace with your Google Custom Search Engine ID
-
+      var apiKey = 'AIzaSyA2iJ5eI2Y_4wM04yOaX0fXpINMemQAnw0'; 
+      var searchEngineId = '40f00a839f2504550'; 
       // Prepare the request URL
       var apiUrl = 'https://www.googleapis.com/customsearch/v1';
       apiUrl += '?key=' + apiKey;
       apiUrl += '&cx=' + searchEngineId;
       apiUrl += '&q=' + encodeURIComponent(searchTerm);
-
       // Send the request
       var xhr = new XMLHttpRequest();
       xhr.open('GET', apiUrl, true);
@@ -344,57 +307,57 @@
       var resultFrame = document.getElementById('resultFrame');
       resultFrame.innerHTML = '';
 
-// ...
-for (var i = 0; i < results.length; i++) {
-  var result = results[i];
+    //result
+    for (var i = 0; i < results.length; i++) {
+    var result = results[i];
 
-  var resultContainer = document.createElement('div');
-  resultContainer.classList.add('resultContainer');
+    var resultContainer = document.createElement('div');
+    resultContainer.classList.add('resultContainer');
 
-  var resultTitle = document.createElement('a'); // Change this line to create the result title as an <a> element
-  resultTitle.classList.add('resultTitle');
-  resultTitle.href = result.link;
-  resultTitle.textContent = result.title;
-  resultTitle.target = '_blank';
+    var resultTitle = document.createElement('a'); 
+    resultTitle.classList.add('resultTitle');
+    resultTitle.href = result.link;
+    resultTitle.textContent = result.title;
+    resultTitle.target = '_blank';
 
-  resultTitle.addEventListener('mouseover', function() {
-    this.style.color = 'blue';
-  });
+    resultTitle.addEventListener('mouseover', function() {
+        this.style.color = 'blue';
+    });
 
-  resultTitle.addEventListener('mouseout', function() {
-    this.style.color = '#000';
-  });
+    resultTitle.addEventListener('mouseout', function() {
+        this.style.color = '#000';
+    });
 
-  var resultSnippet = document.createElement('p');
-  resultSnippet.classList.add('resultSnippet');
-  resultSnippet.textContent = result.snippet;
+    var resultSnippet = document.createElement('p');
+    resultSnippet.classList.add('resultSnippet');
+    resultSnippet.textContent = result.snippet;
 
-  var resultImage = document.createElement('img');
-  resultImage.classList.add('resultImage');
-  resultImage.src = result.pagemap && result.pagemap.cse_image && result.pagemap.cse_image[0].src || ''; // Check if properties exist
+    var resultImage = document.createElement('img');
+    resultImage.classList.add('resultImage');
+    resultImage.src = result.pagemap && result.pagemap.cse_image && result.pagemap.cse_image[0].src || ''; // Check if properties exist
 
-  resultContainer.appendChild(resultTitle);
+    resultContainer.appendChild(resultTitle);
 
-  var contentWrapper = document.createElement('div');
-  contentWrapper.style.display = 'flex'; /* Add this line */
-  contentWrapper.appendChild(resultImage);
-  contentWrapper.appendChild(resultSnippet);
+    var contentWrapper = document.createElement('div');
+    contentWrapper.style.display = 'flex'; /* Add this line */
+    contentWrapper.appendChild(resultImage);
+    contentWrapper.appendChild(resultSnippet);
 
-  resultContainer.appendChild(contentWrapper);
-  resultFrame.appendChild(resultContainer);
+    resultContainer.appendChild(contentWrapper);
+    resultFrame.appendChild(resultContainer);
 
-  // ...
+    // ...
 
-  // Add code to set text color to white in dark mode
-  resultTitle.addEventListener('mouseover', function() {
-    this.style.color = 'blue';
-  });
+    // to set text color to white in dark mode
+    resultTitle.addEventListener('mouseover', function() {
+        this.style.color = 'blue';
+    });
 
-  resultTitle.addEventListener('mouseout', function() {
-    this.style.color = 'green'; // Change this line to match the desired link color
-  });
-}
-}
+    resultTitle.addEventListener('mouseout', function() {
+        this.style.color = 'green'; // Change this line to match the desired link color
+    });
+    }
+    }
   </script>
 </body>
 </html>
